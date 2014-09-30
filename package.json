@@ -4,7 +4,7 @@
   "description": "Reusable component for analyzing docker setups",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "lodash": "^2.4.1"
   },
   "devDependencies": {
-    "mocha": "^1.21.4"
+    "mocha": "^1.21.4",
+    "must": "^0.12.0"
   }
 }

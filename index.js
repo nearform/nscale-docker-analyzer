@@ -37,30 +37,31 @@ module.exports = function dockerContainers(dockerSupport) {
     var topologyContainers = result.topology.containers;
     var newTopology = {};
 
-    function genContainer(container) {
-      var cdef = matchImageToContainer(container, result);
-      if (cdef) {
-        instance.contains.push(container.Id);
-        newTopology[container.Id] = {id: container.Id,
-                                     containerDefinitionId: cdef.id,
-                                     containedBy:  instance.id,
-                                     contains: [],
-                                     specific: {dockerImageId: cdef.specific.dockerImageId,
-                                                dockerContainerId: container.Id,
-                                                containerBinary: '',
-                                                dockerLocalTag: '',
-                                                buildNumber: 0,
-                                                version: ''}};
-      }
-    }
-
     async.eachSeries(_.values(topologyContainers), function(instance, cb) {
+
+      function genContainer(container) {
+        var cdef = matchImageToContainer(container, result);
+        if (cdef) {
+          instance.contains.push(container.Id);
+          newTopology[container.Id] = {id: container.Id,
+                                       containerDefinitionId: cdef.id,
+                                       containedBy:  instance.id,
+                                       contains: [],
+                                       specific: {dockerImageId: cdef.specific.dockerImageId,
+                                                  dockerContainerId: container.Id,
+                                                  containerBinary: '',
+                                                  dockerLocalTag: '',
+                                                  buildNumber: 0,
+                                                  version: ''}};
+        }
+      }
+
       queryContainers(function(err, containers) {
         if (err) {
           return cb(err);
         }
 
-        if (options.dockerFilters) {
+        if (options.dockerFilters && options.dockerFilters.length > 0) {
           _.each(containers, function(container) {
             _.each(options.dockerFilters, function(filter) {
               if (container.Image.indexOf(filter) !== -1) {
