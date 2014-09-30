@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha"
   },
+  "pre-commit": "test",
   "repository": {
     "type": "git",
     "url": "https://github.com/nearform/nscale-docker-analyzer.git"
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "mocha": "^1.21.4",
-    "must": "^0.12.0"
+    "must": "^0.12.0",
+    "pre-commit": "0.0.9"
   }
 }
