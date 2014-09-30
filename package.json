@@ -1,0 +1,26 @@
+{
+  "name": "nscale-docker-analyzer",
+  "version": "0.0.1",
+  "description": "Reusable component for analyzing docker setups",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nearform/nscale-docker-analyzer.git"
+  },
+  "author": "Matteo Collina <matteo.collina@nearform.com>",
+  "license": "Artistic License 2.0",
+  "bugs": {
+    "url": "https://github.com/nearform/nscale-docker-analyzer/issues"
+  },
+  "homepage": "https://github.com/nearform/nscale-docker-analyzer",
+  "dependencies": {
+    "async": "^0.9.0",
+    "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.4"
+  }
+}
