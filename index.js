@@ -22,12 +22,14 @@ var matchImageToContainer = function(container, results) {
     return _.find(cdef.specific.imageTags, function(tag) {
       if (tag === container.Image) {
         cdef.specific.imageTag = tag;
+        cdef.name = tag;
       }
       return tag === container.Image;
     });
   });
   return result;
 };
+
 
 
 module.exports = function dockerContainers(dockerSupport) {
@@ -65,10 +67,10 @@ module.exports = function dockerContainers(dockerSupport) {
           _.each(containers, function(container) {
             _.each(options.dockerFilters, function(filter) {
               if (container.Image.indexOf(filter) !== -1) {
-                genContainer(container)
+                genContainer(container);
               }
             });
-          })
+          });
         }
         else {
           _.each(containers, genContainer);
@@ -79,7 +81,7 @@ module.exports = function dockerContainers(dockerSupport) {
       _.merge(result.topology.containers, newTopology);
       done();
     });
-  };
+  }
 
 
   /**
@@ -91,16 +93,18 @@ module.exports = function dockerContainers(dockerSupport) {
     var queryImages           = dockerSupport(options).queryImages;
 
     function genDefinition(image) {
-      containerDefinitions.push({id: image.Id,
-                                 name: image.RepoTags[0],
-                                 type: 'docker',
-                                 specific: {repositoryUrl: '',
-                                            buildScript: '',
-                                            'arguments': '',
-                                            buildHead: 0,
-                                            dockerImageId: image.Id,
-                                            imageTags: image.RepoTags,
-                                            imageTag: image.RepoTags[0]}});
+      if (!_.find(containerDefinitions, function(cdef) { return cdef.id === image.Id; })) {
+        containerDefinitions.push({id: image.Id,
+                                   name: image.RepoTags[0],
+                                   type: 'docker',
+                                   specific: {repositoryUrl: '',
+                                              buildScript: '',
+                                              'arguments': '',
+                                              buildHead: 0,
+                                              dockerImageId: image.Id,
+                                              imageTags: image.RepoTags,
+                                              imageTag: image.RepoTags[0]}});
+      }
     }
 
     async.eachSeries(_.values(topologyContainers), function(instance, cb) {
@@ -113,10 +117,10 @@ module.exports = function dockerContainers(dockerSupport) {
           _.each(images, function(image) {
             _.each(options.dockerFilters, function(filter) {
               if (image.RepoTags[0].indexOf(filter) !== -1) {
-                genDefinition(image)
+                genDefinition(image);
               }
             });
-          })
+          });
         }
         else {
           _.each(images, genDefinition);
@@ -124,11 +128,11 @@ module.exports = function dockerContainers(dockerSupport) {
         cb();
       });
     }, done);
-  };
+  }
 
   return {
     fetchImages: fetchImages,
     fetchContainers: fetchContainers
-  }
+  };
 };
 
