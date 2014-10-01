@@ -56,7 +56,7 @@ module.exports = function dockerContainers(dockerSupport) {
         }
       }
 
-      queryContainers(function(err, containers) {
+      queryContainers(instance.specific.privateIpAddress, function(err, containers) {
         if (err) {
           return cb(err);
         }
@@ -104,7 +104,7 @@ module.exports = function dockerContainers(dockerSupport) {
     }
 
     async.eachSeries(_.values(topologyContainers), function(instance, cb) {
-      queryImages(function(err, images) {
+      queryImages(instance.specific.privateIpAddress, function(err, images) {
         if (err) {
           return cb(err);
         }

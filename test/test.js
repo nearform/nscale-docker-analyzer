@@ -6,7 +6,7 @@ var expect = require('must');
 
 describe('docker-analyzer', function() {
   function buildMock() {
-    function query(file, cb) {
+    function query(file, ipaddress, cb) {
       fs.readFile(file, function(err, data) {
         if (data) {
           data = JSON.parse(data);
