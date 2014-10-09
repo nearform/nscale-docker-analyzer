@@ -1,7 +1,8 @@
 
+'use strict';
+
 var dockerAnalyzer = require('../');
 var fs = require('fs');
-var assert = require('assert');
 var expect = require('must');
 
 describe('docker-analyzer', function() {
@@ -12,13 +13,13 @@ describe('docker-analyzer', function() {
           data = JSON.parse(data);
         }
         cb(err, data);
-      })
+      });
     }
 
     return {
       queryContainers: query.bind(null, __dirname + '/containers.json'),
       queryImages: query.bind(null, __dirname + '/images.json')
-    }
+    };
   }
 
   function buildResult() {
@@ -52,12 +53,12 @@ describe('docker-analyzer', function() {
 
   beforeEach(function() {
     instance = dockerAnalyzer(buildMock);
-    result = buildResult()
+    result = buildResult();
   });
 
   describe('without dockerFilters', function() {
     it('must create the container definitions based on the images', function(done) {
-      instance.fetchImages({}, result, function(err) {
+      instance.fetchImages({}, result, function() {
         var expected = JSON.parse(fs.readFileSync(__dirname + '/images-without-dockerfilters.json'));
         expect(result.containerDefinitions).to.eql(expected);
         done();
@@ -65,7 +66,7 @@ describe('docker-analyzer', function() {
     });
 
     it('must create the container definitions based on the images (dockerFilters present but empty)', function(done) {
-      instance.fetchImages({ dockerFilters: [] }, result, function(err) {
+      instance.fetchImages({ dockerFilters: [] }, result, function() {
         var expected = JSON.parse(fs.readFileSync(__dirname + '/images-without-dockerfilters.json'));
         expect(result.containerDefinitions).to.eql(expected);
         done();
@@ -73,47 +74,47 @@ describe('docker-analyzer', function() {
     });
 
     it('must create the topology based on the containers', function(done) {
-      instance.fetchImages({}, result, function(err) {
-        instance.fetchContainers({}, result, function(err) {
+      instance.fetchImages({}, result, function() {
+        instance.fetchContainers({}, result, function() {
           var expected = JSON.parse(fs.readFileSync(__dirname + '/containers-without-dockerfilters.json'));
           expect(result.topology.containers).to.eql(expected);
           done();
-        })
+        });
       });
     });
 
     it('must create the topology based on the containers (dockerFilters present but empty)', function(done) {
-      var opts = { dockerFilters: [] }
-      instance.fetchImages(opts, result, function(err) {
-        instance.fetchContainers(opts, result, function(err) {
+      var opts = { dockerFilters: [] };
+      instance.fetchImages(opts, result, function() {
+        instance.fetchContainers(opts, result, function() {
           var expected = JSON.parse(fs.readFileSync(__dirname + '/containers-without-dockerfilters.json'));
           expect(result.topology.containers).to.eql(expected);
           done();
-        })
+        });
       });
     });
   });
 
   describe('with dockerFilters', function() {
 
-    var opts = { dockerFilters: ['sudc'] }
+    var opts = { dockerFilters: ['sudc'] };
 
     it('must create the container definitions based on the images', function(done) {
-      instance.fetchImages(opts, result, function(err) {
+      instance.fetchImages(opts, result, function() {
         var expected = JSON.parse(fs.readFileSync(__dirname + '/images-with-dockerfilters.json'));
         expect(result.containerDefinitions).to.eql(expected);
         done();
       });
-    })
+    });
 
     it('must create the topology based on the containers', function(done) {
-      instance.fetchImages(opts, result, function(err) {
-        instance.fetchContainers(opts, result, function(err) {
+      instance.fetchImages(opts, result, function() {
+        instance.fetchContainers(opts, result, function() {
           var expected = JSON.parse(fs.readFileSync(__dirname + '/containers-with-dockerfilters.json'));
           expect(result.topology.containers).to.eql(expected);
           done();
-        })
+        });
       });
     });
-  })
-})
+  });
+});

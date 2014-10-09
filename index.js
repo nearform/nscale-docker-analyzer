@@ -14,9 +14,6 @@
 
 'use strict';
 
-var async = require('async');
-var _ = require('lodash');
-
 module.exports = function dockerAnalyzer(dockerSupport) {
 
   return {
