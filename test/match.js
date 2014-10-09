@@ -15,7 +15,7 @@ describe('match containers and images with the original system', function() {
   it('should match the image id to those in the original system definition', function() {
     var input = JSON.parse(fs.readFileSync(__dirname + '/match-input.json'));
     var expected = JSON.parse(fs.readFileSync(__dirname + '/match-output.json'));
-    instance(input, function(err, result) {
+    instance({}, input, function(err, result) {
       expect(result).to.eql(expected);
     });
   });
@@ -23,6 +23,6 @@ describe('match containers and images with the original system', function() {
   it('should work synchronously', function() {
     var input = JSON.parse(fs.readFileSync(__dirname + '/match-input.json'));
     var expected = JSON.parse(fs.readFileSync(__dirname + '/match-output.json'));
-    expect(instance(input)).to.eql(expected);
+    expect(instance({}, input)).to.eql(expected);
   });
 });
