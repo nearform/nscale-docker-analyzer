@@ -14,12 +14,31 @@
 
 'use strict';
 
-module.exports = function dockerAnalyzer(dockerSupport, system) {
+var async = require('async');
 
-  return {
-    fetchImages: require('./lib/images')(dockerSupport),
-    fetchContainers: require('./lib/containers')(dockerSupport),
-    match: require('./lib/match')(system)
-  };
-};
+function build(dockerSupport, system) {
 
+  var fetchImages = require('./lib/images')(dockerSupport);
+  var fetchContainers = require('./lib/containers')(dockerSupport);
+  var match = require('./lib/match')(system);
+
+  function dockerAnalyzer(config, result, done) {
+    async.eachSeries([
+      fetchImages,
+      fetchContainers,
+      match
+    ], function(func, cb) {
+      func(config, result, function(err) {
+        if (err) { return cb(err); }
+        cb(null);
+      });
+    }, function(err) {
+      if (err) { return done(err); }
+      done(null, result);
+    });
+  }
+
+  return dockerAnalyzer;
+}
+
+module.exports = build;

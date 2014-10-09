@@ -7,7 +7,10 @@
     "test": "mocha",
     "jshint": "jshint index.js lib/*.js test/*.js"
   },
-  "pre-commit": ["jshint", "test"],
+  "pre-commit": [
+    "jshint",
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/nearform/nscale-docker-analyzer.git"
