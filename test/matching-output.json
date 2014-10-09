@@ -1,0 +1,138 @@
+{
+  "name": "nscaledemo",
+  "namespace": "nscaledemo",
+  "containerDefinitions": [
+    {
+    "name": "Machine",
+    "type": "blank-container",
+    "specific": {},
+    "id": "85d99b2c-06d0-5485-9501-4d4ed429799c"
+  },
+  {
+    "id": "9ddc6c027-9ce2-5fdg-9936-696d2b3789bb",
+    "name": "nscaledemo/web-2:latest",
+    "type": "docker",
+    "specific": {
+      "repositoryUrl": "",
+      "buildScript": "",
+      "arguments": "",
+      "buildHead": 0,
+      "dockerImageId": "127046c908322a9cdc6c504a6dfbcbfaa20cb49f7b541a4e75305c9c69ad7a07",
+      "imageTags": [
+        "nscaledemo/web-2:latest"
+      ],
+      "imageTag": "nscaledemo/web-2:latest"
+    }
+  },
+  {
+    "id": "f3a5a1b1bcc1fbce180e339588164283a9c11f6c3e3878f5ed98279ec5e103a1",
+    "name": "nscaledemo/web-7:latest",
+    "type": "docker",
+    "specific": {
+      "repositoryUrl": "",
+      "buildScript": "",
+      "arguments": "",
+      "buildHead": 0,
+      "dockerImageId": "f3a5a1b1bcc1fbce180e339588164283a9c11f6c3e3878f5ed98279ec5e103a1",
+      "imageTags": [
+        "nscaledemo/web-7:latest"
+      ],
+      "imageTag": "nscaledemo/web-7:latest"
+    }
+  },
+  {
+    "id": "35dd114480697522fb307355293e2bdf9248472e32e594bfbc65bd0d5bdc6442",
+    "name": "nscaledemo/web-6:latest",
+    "type": "docker",
+    "specific": {
+      "repositoryUrl": "",
+      "buildScript": "",
+      "arguments": "",
+      "buildHead": 0,
+      "dockerImageId": "35dd114480697522fb307355293e2bdf9248472e32e594bfbc65bd0d5bdc6442",
+      "imageTags": [
+        "nscaledemo/web-6:latest"
+      ],
+      "imageTag": "nscaledemo/web-6:latest"
+    }
+  },
+  {
+    "id": "741720cff8cd52b90a2e28efb0d64c7eb02ae61342d93a2eff8ce4da99758c16",
+    "name": "nscaledemo/web-5:latest",
+    "type": "docker",
+    "specific": {
+      "repositoryUrl": "",
+      "buildScript": "",
+      "arguments": "",
+      "buildHead": 0,
+      "dockerImageId": "741720cff8cd52b90a2e28efb0d64c7eb02ae61342d93a2eff8ce4da99758c16",
+      "imageTags": [
+        "nscaledemo/web-5:latest"
+      ],
+      "imageTag": "nscaledemo/web-5:latest"
+    }
+  },
+  {
+    "id": "de4571ba1a81c2630add44a3655e439ca2470dbb911398e833e9af5e4e794ac1",
+    "name": "nscaledemo/web-4:latest",
+    "type": "docker",
+    "specific": {
+      "repositoryUrl": "",
+      "buildScript": "",
+      "arguments": "",
+      "buildHead": 0,
+      "dockerImageId": "de4571ba1a81c2630add44a3655e439ca2470dbb911398e833e9af5e4e794ac1",
+      "imageTags": [
+        "nscaledemo/web-4:latest"
+      ],
+      "imageTag": "nscaledemo/web-4:latest"
+    }
+  },
+  {
+    "id": "f84c394d473f4c49a852590e69474404fb6b0505a03cc2c4c17766641ff65d26",
+    "name": "nscaledemo/web-3:latest",
+    "type": "docker",
+    "specific": {
+      "repositoryUrl": "",
+      "buildScript": "",
+      "arguments": "",
+      "buildHead": 0,
+      "dockerImageId": "f84c394d473f4c49a852590e69474404fb6b0505a03cc2c4c17766641ff65d26",
+      "imageTags": [
+        "nscaledemo/web-3:latest"
+      ],
+      "imageTag": "nscaledemo/web-3:latest"
+    }
+  }
+  ],
+  "topology": {
+    "containers": {
+      "10": {
+        "id": "10",
+        "containerDefinitionId": "85d99b2c-06d0-5485-9501-4d4ed429799c",
+        "containedBy": "10",
+        "contains": [
+          "e5d8ec67-044f-4068-9a6f-73601384945a"
+        ],
+        "type": "blank-container",
+        "specific": {
+          "ipaddress": "localhost"
+        }
+      },
+      "e5d8ec67-044f-4068-9a6f-73601384945a": {
+        "id": "e5d8ec67-044f-4068-9a6f-73601384945a",
+        "containerDefinitionId": "9ddc6c027-9ce2-5fdg-9936-696d2b3789bb",
+        "containedBy": "10",
+        "contains": [],
+        "specific": {
+          "dockerImageId": "127046c908322a9cdc6c504a6dfbcbfaa20cb49f7b541a4e75305c9c69ad7a07",
+          "dockerContainerId": "2ffac4920f5fee3e0b7297308ce0af126b55392cc6ccf4532df4fa3c5419d3e6",
+          "containerBinary": "",
+          "dockerLocalTag": "",
+          "buildNumber": 0,
+          "version": ""
+        }
+      }
+    }
+  }
+}

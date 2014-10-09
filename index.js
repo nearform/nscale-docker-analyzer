@@ -14,11 +14,12 @@
 
 'use strict';
 
-module.exports = function dockerAnalyzer(dockerSupport) {
+module.exports = function dockerAnalyzer(dockerSupport, system) {
 
   return {
     fetchImages: require('./lib/images')(dockerSupport),
-    fetchContainers: require('./lib/containers')(dockerSupport)
+    fetchContainers: require('./lib/containers')(dockerSupport),
+    match: require('./lib/match')(system)
   };
 };
 

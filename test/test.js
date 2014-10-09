@@ -117,4 +117,25 @@ describe('docker-analyzer', function() {
       });
     });
   });
+
+  describe('matching step', function() {
+    beforeEach(function() {
+      var system = JSON.parse(fs.readFileSync(__dirname + '/matching-system.json'));
+      instance = dockerAnalyzer(buildMock, system);
+    });
+
+    it('should match the image id to those in the original system definition', function() {
+      var input = JSON.parse(fs.readFileSync(__dirname + '/matching-input.json'));
+      var expected = JSON.parse(fs.readFileSync(__dirname + '/matching-output.json'));
+      instance.match(input, function(err, result) {
+        expect(result).to.eql(expected);
+      });
+    });
+
+    it('should work synchronously', function() {
+      var input = JSON.parse(fs.readFileSync(__dirname + '/matching-input.json'));
+      var expected = JSON.parse(fs.readFileSync(__dirname + '/matching-output.json'));
+      expect(instance.match(input)).to.eql(expected);
+    });
+  });
 });
