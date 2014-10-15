@@ -1,0 +1,59 @@
+{
+  "sshKeyPath": "",
+  "name": "nscaledemo",
+  "namespace": "nscaledemo",
+  "id": "e1144711-47bb-5931-9117-94f01dd20f6f",
+  "containerDefinitions": [
+    {
+    "name": "Machine",
+    "type": "blank-container",
+    "specific": {
+      "repositoryToken": "04551b154404a852e663aba4c3fa299e04f6e8a5"
+    },
+    "id": "85d99b2c-06d0-5485-9501-4d4ed429799c"
+  },
+  {
+    "name": "web",
+    "type": "docker",
+    "dependencies": {},
+    "specific": {
+      "repositoryUrl": "git@github.com:nearform/nscaledemo.git",
+      "buildScript": "web/build.sh",
+      "arguments": "-e WEB_HOST=localhost -p 8000:8000 -d __TARGETNAME__ sh run.sh",
+      "buildHead": 3,
+      "binary": "/Users/matteocollina/.nscale/data/build/nscaledemo/builds/web-2",
+      "dockerImageId": "127046c908322a9cdc6c504a6dfbcbfaa20cb49f7b541a4e75305c9c69ad7a07"
+    },
+    "id": "9ddc6c027-9ce2-5fdg-9936-696d2b3789bb",
+    "version": "0.0.1"
+  }
+  ],
+  "topology": {
+    "containers": {
+      "10": {
+        "id": "10",
+        "containerDefinitionId": "85d99b2c-06d0-5485-9501-4d4ed429799c",
+        "containedBy": "10",
+        "contains": [
+          "e5d8ec67-044f-4068-9a6f-73601384945a"
+        ],
+        "specific": {
+          "ipaddress": "localhost"
+        }
+      },
+      "e5d8ec67-044f-4068-9a6f-73601384945a": {
+        "id": "e5d8ec67-044f-4068-9a6f-73601384945a",
+        "containerDefinitionId": "9ddc6c027-9ce2-5fdg-9936-696d2b3789bb",
+        "containedBy": "10",
+        "contains": [],
+        "specific": {
+          "dockerImageId": "127046c908322a9cdc6c504a6dfbcbfaa20cb49f7b541a4e75305c9c69ad7a07",
+          "containerBinary": "/Users/matteocollina/.nscale/data/build/nscaledemo/builds/web-2",
+          "dockerLocalTag": "nscaledemo/web-2",
+          "buildNumber": 2,
+          "version": "0.0.1"
+        }
+      }
+    }
+  }
+}
