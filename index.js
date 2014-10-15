@@ -44,17 +44,19 @@ module.exports = function dockerContainers(dockerSupport) {
       function genContainer(container) {
         var cdef = matchImageToContainer(container, result);
         if (cdef) {
-          instance.contains.push(container.Id);
-          newTopology[container.Id] = {id: container.Id,
-                                       containerDefinitionId: cdef.id,
-                                       containedBy:  instance.id,
-                                       contains: [],
-                                       specific: {dockerImageId: cdef.specific.dockerImageId,
-                                                  dockerContainerId: container.Id,
-                                                  containerBinary: '',
-                                                  dockerLocalTag: '',
-                                                  buildNumber: 0,
-                                                  version: ''}};
+          if (!_.find(instance.contains, function(c) { return c === container.Id; })) {
+            instance.contains.push(container.Id);
+            newTopology[container.Id] = {id: container.Id,
+                                         containerDefinitionId: cdef.id,
+                                         containedBy:  instance.id,
+                                         contains: [],
+                                         specific: {dockerImageId: cdef.specific.dockerImageId,
+                                                    dockerContainerId: container.Id,
+                                                    containerBinary: '',
+                                                    dockerLocalTag: '',
+                                                    buildNumber: 0,
+                                                    version: ''}};
+          }
         }
       }
 
