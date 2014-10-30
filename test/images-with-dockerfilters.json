@@ -95,6 +95,7 @@
     "buildHead": 0,
     "dockerImageId": "f186c5894ae000678d8ff4ec3b9856eed41cfa5e1b70141ec8e7fb593aeedf6b",
     "imageTags": [
+      "aaa/bbb",
       "sudc/hist-srv-199:latest"
     ],
     "imageTag": "sudc/hist-srv-199:latest"
