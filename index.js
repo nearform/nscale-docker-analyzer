@@ -15,12 +15,38 @@
 'use strict';
 
 var async = require('async');
+var _ = require('lodash');
 
-function build(dockerSupport, system) {
 
+function initFilters(config, system) {
+  var cnames = _.map(system.containerDefinitions, function(cdef) { return {name: cdef.name, type: cdef.type}; });
+  cnames = _.filter(cnames, function(name) { return name.type === 'docker'; });
+
+  config.dockerFilters = config.dockerFilters || [];
+
+  if (system.name) {
+    if (!_.find(config.dockerFilters, function(filter) { return filter === system.name; })) {
+      config.dockerFilters.push(system.name);
+    }
+  }
+
+  _.each(cnames, function(name) {
+    if (!_.find(config.dockerFilters, function(filter) { return filter === name.name; })) {
+      if (system.name && name.name.indexOf(system.name) !== 0) {
+        config.dockerFilters.push(name.name);
+      }
+    }
+  });
+}
+
+
+
+function build(dockerSupport, config, system) {
   var fetchImages = require('./lib/images')(dockerSupport);
   var fetchContainers = require('./lib/containers')(dockerSupport);
   var match = require('./lib/match')(system);
+
+  initFilters(config, system);
 
   function dockerAnalyzer(config, result, done) {
     async.eachSeries([
@@ -42,3 +68,4 @@ function build(dockerSupport, system) {
 }
 
 module.exports = build;
+
