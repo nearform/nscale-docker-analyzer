@@ -1,6 +1,6 @@
 {
   "name": "nscale-docker-analyzer",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "description": "Reusable component for analyzing docker setups",
   "main": "index.js",
   "scripts": {
