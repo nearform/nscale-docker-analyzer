@@ -8,7 +8,6 @@
   },
   "pre-commit": [
     "jshint",
-    "test"
   ],
   "repository": {
     "type": "git",
