@@ -1,14 +1,13 @@
 {
   "name": "nscale-docker-analyzer",
-  "version": "0.17.3",
+  "version": "0.17.4",
   "description": "Reusable component for analyzing docker setups",
   "main": "index.js",
   "scripts": {
     "jshint": "jshint index.js lib/*.js"
   },
   "pre-commit": [
-    "jshint",
-    "test"
+    "jshint"
   ],
   "repository": {
     "type": "git",
